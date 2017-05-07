@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <conio.h>
+#include <time.h> 
 #include <stdbool.h>							//为bool类型提供支持 
 
 /*****************************控制台颜色函数宏定义*****************************/
@@ -463,7 +464,7 @@ int DistortionDetection(void)
 {
 	int x,y;
 	Tetris *Tmp = Player->Next;
-	if(Immortalx > 5)							//如果现在'移动方块'在地图右半边.
+	if(Immortalx >= 5)							//如果现在'移动方块'在地图右半边.
 	{
 		for(x = 3;x >= 0;x--)
 		{
@@ -471,13 +472,9 @@ int DistortionDetection(void)
 			{
 				if(Tmp->block[x][y])
 				{
-					if((x + Immortalx) >=10)
+					if((x + Immortalx) >=10 ||Map[x + Immortalx][y + 1] == 1)
 					{
 						return 0;
-					}
-					else
-					{
-						return 1;
 					}
 				}
 			}
@@ -491,13 +488,9 @@ int DistortionDetection(void)
 			{
 				if(Tmp->block[x][y])
 				{
-					if((Immortalx - x) < 0)
+					if((Immortalx - x) < 0 || Map[x + Immortalx][y + 1] == 1)
 					{
 						return 0;
-					}
-					else
-					{
-						return 1;
 					}
 				}
 			}
