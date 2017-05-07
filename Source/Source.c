@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <conio.h>
-#include <stdbool.h>							//为bool类型提供支持. 
+#include <stdbool.h>							//为bool类型提供支持 
 
 /*****************************控制台颜色函数宏定义*****************************/
 #define RED SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED)
@@ -282,7 +282,7 @@ void Play(void)
 				for(;;)
 				{
 					;
-					if(kbhit)
+					if(kbhit())
 					{
 						break;
 					}
@@ -432,6 +432,7 @@ int ScoreDetection(void)
 	{
 		goto JK;
 	}
+	count = 0; 
 	for(x = 0;x < 10;x++)
 	{
 		if(Map[x][17] == 1)
@@ -443,6 +444,7 @@ int ScoreDetection(void)
 	{
 		goto JK;
 	}
+	count = 0;
 	for(x = 0;x < 10;x++)
 	{
 		if(Map[x][16] == 1)
