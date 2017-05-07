@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <conio.h>
-#include <stdbool.h>							//为bool类型提供支持 
+#include <stdbool.h>							//为bool类型提供支持. 
 
 /*****************************控制台颜色函数宏定义*****************************/
 #define RED SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED)
