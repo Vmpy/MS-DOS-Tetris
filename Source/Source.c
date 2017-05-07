@@ -351,6 +351,7 @@ void Abutment(void)
 			}
 		}
 	}
+	return;
 }
 
 int CollisionDetection(void)
@@ -520,6 +521,7 @@ int MoveDetection(void)
 			}
 		}
 	}
+	return;
 }
 
 int RightDetection(void)
@@ -601,6 +603,7 @@ void TwotoOne(void)
 			}
 		}
 	}
+	return;
 }
 
 void ElementDown(void)
@@ -680,6 +683,7 @@ void Display(void)
 	printf("※俄罗斯方块※");
 	gotoxy(23,35);
 	printf("操作: W:变形; AD:左右移动; S:加速下坠; P:暂停.");
+	return;
 }
 
 void UIColor(void)
@@ -695,6 +699,7 @@ void UIColor(void)
 		case 6:White;return;
 		case 7:Other;return; 
 	}
+	return;
 }
 
 int Random(void)
@@ -725,4 +730,5 @@ void HideCursor(void)
 {
 	CONSOLE_CURSOR_INFO cursor_info = {1, 0}; 
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor_info);
+	return;
 }
