@@ -275,6 +275,18 @@ void Play(void)
 			{
 				bSleep = true;
 				break;
+			}
+			case 'p':
+			case 'P':
+			{
+				for(;;)
+				{
+					;
+					if(kbhit)
+					{
+						break;
+					}
+				}
 			} 
 		}
 		ch = '\0';                //让ch复位 
@@ -290,7 +302,7 @@ void Play(void)
 		{
 			return;
 		}
-		ScoreDetection();
+		ScoreDetection();							/*俄罗斯方块中最多4排消除所以四次调用*/
 		ScoreDetection();
 		ScoreDetection();
 		ScoreDetection();
@@ -398,6 +410,7 @@ int ScoreDetection(void)
 	}
 	if(count == 10)
 	{
+		JK:
 		for(x = 0;x < 10;x++)
 		{
              Map[x][19] = 0;
@@ -407,10 +420,41 @@ int ScoreDetection(void)
 		count = 0;
 		return 0;							
 	}
-	else
+	count = 0;
+	for(x = 0;x < 10;x++)
 	{
-		return 0;
-	} 
+		if(Map[x][18] == 1)
+		{
+			count++;
+		}
+	}
+	if (count == 10)
+	{
+		goto JK;
+	}
+	for(x = 0;x < 10;x++)
+	{
+		if(Map[x][17] == 1)
+		{
+			count++;
+		}
+	}
+	if (count == 10)
+	{
+		goto JK;
+	}
+	for(x = 0;x < 10;x++)
+	{
+		if(Map[x][16] == 1)
+		{
+			count++;
+		}
+	}
+	if (count == 10)
+	{
+		goto JK;
+	}
+	return 0; 
 }
 
 int DistortionDetection(void)
@@ -529,7 +573,7 @@ void End(void)
 	printf("Maker:vmpy\n");
 	printf("Github:https://github.com/vmpy\n");
 	printf("Tieba:http://tieba.baidu.com/home/main?id=5632b1f9c0c74d61676963175d&fr=userbar\n");
-	printf("\\\\Flee.\\\\\n\n"); 
+	printf("Flee.\n\n"); 
 	printf("按任意键两下结束.");
 	getchar();
 	getchar();
@@ -639,6 +683,8 @@ void Display(void)
 	printf("Score:%d",Score);
 	gotoxy(34,0);
 	printf("※俄罗斯方块※");
+	gotoxy(23,35);
+	printf("操作: W:变形; AD:左右移动; S:加速下坠; P:暂停.");
 }
 
 void UIColor(void)
