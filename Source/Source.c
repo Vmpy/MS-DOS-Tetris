@@ -57,13 +57,13 @@ int Immortalx,Immortaly;
 int Map[10][20] = {{0}};
 int iColor;									//通过此数据为UIColor函数判定
 bool bSleep = false;
-int bSleepcount = 0; 
+int bSleepcount = 0; 								//跳过休眠的计数变量
 
 int Score = 0; 
 
 int main(void)
 {
-	HideCursor();
+	HideCursor();					
 	srand((unsigned)time(NULL));			//"随机化"rand() 
 	Initialise();
 	Play();
@@ -234,7 +234,7 @@ void Play(void)
 			{
 				if(Immortalx > 0 && LeftDetection())
 				{
-					Immortalx--;
+					Immortalx--;			//左边移动，通过调整Immortalx实现.
 				}
 				if(kbhit())
 				{
