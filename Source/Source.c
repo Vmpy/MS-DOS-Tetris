@@ -27,7 +27,7 @@ void Abutment(void);								//更准确来说是刷新
 int Random(void);									//生成下一个移动方块 
 void TwotoOne(void);								//移动方块(链表Player)变为不动方块 
 void End(void);										//游戏结束 
-void ElementDown(void);								//元素下移 
+void ElementDown(int);								//元素下移 
 int CollisionDetection(void);						//碰撞检测 
 int DeathDetection(void);							//死亡检测 
 int ScoreDetection(void);							//得分检测 
@@ -57,13 +57,13 @@ int Immortalx,Immortaly;
 int Map[10][20] = {{0}};
 int iColor;									//通过此数据为UIColor函数判定
 bool bSleep = false;
-int bSleepcount = 0; 								//跳过休眠的计数变量
+int bSleepcount = 0; 
 
 int Score = 0; 
 
 int main(void)
 {
-	HideCursor();					
+	HideCursor();
 	srand((unsigned)time(NULL));			//"随机化"rand() 
 	Initialise();
 	Play();
@@ -234,7 +234,7 @@ void Play(void)
 			{
 				if(Immortalx > 0 && LeftDetection())
 				{
-					Immortalx--;			//左边移动，通过调整Immortalx实现.
+					Immortalx--;
 				}
 				if(kbhit())
 				{
@@ -401,63 +401,36 @@ int DeathDetection(void)
 
 int ScoreDetection(void)
 {
-	int x;
+	int x,y;
 	int count = 0;
-	for(x = 0;x < 10;x++)
+	for(y = 0;y < 20;y++)
 	{
-		if(Map[x][19] == 1)
+		for(x = 0;x < 10;x++)
 		{
-			count++;
+			if(Map[x][y] == 1)
+			{
+				count++;
+				if(count == 10)
+				{
+					goto JK;
+				}
+			}
 		}
+		count = 0;
 	}
-	if(count == 10)
+	while(0)
 	{
 		JK:
 		for(x = 0;x < 10;x++)
 		{
-             Map[x][19] = 0;
+             Map[x][y] = 0;
 		}
-		ElementDown(); 
+		ElementDown(y); 
 		Score += 10;							//得分. 
 		count = 0;
 		return 0;							
 	}
-	count = 0;
-	for(x = 0;x < 10;x++)
-	{
-		if(Map[x][18] == 1)
-		{
-			count++;
-		}
-	}
-	if (count == 10)
-	{
-		goto JK;
-	}
-	count = 0; 
-	for(x = 0;x < 10;x++)
-	{
-		if(Map[x][17] == 1)
-		{
-			count++;
-		}
-	}
-	if (count == 10)
-	{
-		goto JK;
-	}
-	count = 0;
-	for(x = 0;x < 10;x++)
-	{
-		if(Map[x][16] == 1)
-		{
-			count++;
-		}
-	}
-	if (count == 10)
-	{
-		goto JK;
-	}
+	
 	return 0; 
 }
 
@@ -606,13 +579,13 @@ void TwotoOne(void)
 	return;
 }
 
-void ElementDown(void)
+void ElementDown(int Y)
 {
 	int x,y;
 	int max;							//Map中堆积的方块最高层数(对应坐标).
 	for(x = 0;x < 10;x++)				//这就是下操过程. 
 	{
-		for(y = 19;y > 0;y--)
+		for(y = Y;y > 0;y--)
 		{
 			Map[x][y] = Map[x][y-1];
 		}
