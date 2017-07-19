@@ -19,19 +19,19 @@
 #define Other SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED&FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY)
 
 void Initialise(void);								//初始化函数，包括各移动方块的定义 
-void Display(void);									//显示函数 
+void Display(void);								    //显示函数 
 void gotoxy(int,int);								//光标定位 
 void ToZero(int N[4][4]);							//二维数组元素归零 
-void Play(void);									//玩家主函数 
+void Play(void);								    //玩家主函数 
 void Abutment(void);								//更准确来说是刷新 
-int Random(void);									//生成下一个移动方块 
+int Random(void);								    //生成下一个移动方块 
 void TwotoOne(void);								//移动方块(链表Player)变为不动方块 
-void End(void);										//游戏结束 
+void End(void);									    //游戏结束 
 void ElementDown(int);								//元素下移 
-int CollisionDetection(void);						//碰撞检测 
+int CollisionDetection(void);				        //碰撞检测 
 int DeathDetection(void);							//死亡检测 
 int ScoreDetection(void);							//得分检测 
-int DistortionDetection(void);						//变形检测(防止变形时碰壁)
+int DistortionDetection(void);				       //变形检测(防止变形时碰壁)
 int MoveDetection(void);							//移动碰壁检测
 int LeftDetection(void);							//左右移动方块检测
 int RightDetection(void);							//同上 
@@ -51,7 +51,7 @@ Tetris *HeadOfO;
 Tetris *HeadOfS;
 Tetris *HeadOfZ;
 Tetris *HeadOfT;
-Tetris *Player;							     //玩家控制的方块指针
+Tetris *Player;							                 //玩家控制的方块指针
 Tetris *PlayerNext; 
 int Immortalx,Immortaly;
 int Map[10][20] = {{0}};
@@ -500,16 +500,13 @@ int MoveDetection(void)
 int RightDetection(void)
 {
 	int x,y;
-	for(x = 3;x >= 0;x--)
+	for(x = 0;x < 10;x++)
 	{
-		for(y = 3;y >= 0;y--)
+		for(y = 0;y < 20;y++)
 		{
-			if(Player->block[x][y])
+			if(Map[x][y] == 2 && Map[x+1][y] == 1)
 			{
-				if(Map[x + Immortalx + 1][y + Immortaly] == 1)
-				{
-					return 0;
-				}
+				return 0;
 			}
 		}
 	}
@@ -519,16 +516,13 @@ int RightDetection(void)
 int LeftDetection(void)
 {
 	int x,y;
-	for(x = 0;x < 4;x++)
+	for(x = 0;x < 10;x++)
 	{
-		for(y = 0;y < 4;y++)
+		for(y = 0;y < 20;y++)
 		{
-			if(Player->block[x][y])
+			if(Map[x][y] == 2 && Map[x-1][y] == 1)
 			{
-				if(Map[x + Immortalx - 1][y + Immortaly] == 1)
-				{
-					return 0;
-				}
+				return 0;
 			}
 		}
 	}
