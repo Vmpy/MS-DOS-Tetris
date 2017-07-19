@@ -37,6 +37,7 @@ int LeftDetection(void);                            //左右移动方块检测
 int RightDetection(void);                           //同上 
 void UIColor(void);                                 //颜色显示判断函数 
 void HideCursor(void);                              //隐藏光标 
+void Clean(void); 
 
 typedef struct Block                                //移动方块的结构体定义(链表) 
 {
@@ -222,6 +223,7 @@ void Play(void)
     iColor = Random();
     while(1)
     {
+    	Clean();
         if(kbhit())
         {
             ch = getch();
@@ -292,7 +294,6 @@ void Play(void)
         }
         ch = '\0';                //让ch复位 
         Immortaly++;
-        system("cls");
         Abutment();
         if(CollisionDetection())
         {
@@ -683,6 +684,31 @@ int Random(void)
         case 6:PlayerNext = HeadOfZ;break;
     }
     return Color;
+}
+
+void Clean(void)
+{
+	int x,y;
+	for(x = 0;x < 10; x++)
+	{
+		for(y = 0;y < 20; y++)
+		{
+			if(Map[x][y] != 1)
+			{ 
+				gotoxy(((2*x-1)<0?0:2*x-1) + 32,y+10);
+				printf(" ");
+			}
+		}
+	}
+	gotoxy(15,10);
+	printf("        ");
+	gotoxy(15,11);
+	printf("        ");
+	gotoxy(15,12);
+	printf("        ");
+	gotoxy(15,13);
+	printf("        "); 
+	return; 
 }
 
 void gotoxy(int x,int y)             /*定位光标，x为行坐标,y为列坐标*/
