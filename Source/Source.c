@@ -439,7 +439,7 @@ int DistortionDetection(void)
 {
     int x,y;
     Tetris *Tmp = Player->Next;
-    if(Immortalx >= 5)                          //如果现在'移动方块'在地图右半边.
+    if(Immortalx >= 5)                          //如果现在'移动方块'在地图右半边.进行判断.
     {
         for(x = 3;x >= 0;x--)
         {
