@@ -20,7 +20,7 @@
 
 void Initialise(void);                              //初始化函数，包括各移动方块的定义 
 void Display(void);                                 //显示函数 
-void gotoxy(int,int);                               //光标定位 
+void gotoxy(int，int);                               //光标定位 
 void ToZero(int N[4][4]);                           //二维数组元素归零 
 void Play(void);                                    //玩家主函数 
 void Abutment(void);                                //更准确来说是刷新 
